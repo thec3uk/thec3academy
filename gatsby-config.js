@@ -64,13 +64,14 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Software Crafts`,
-        short_name: `Software Crafts`,
-        start_url: `/`,
-        background_color: `#f1ece1`,
-        theme_color: `#f1ece1`,
-        display: `minimal-ui`,
-        icon: `static/favicon.ico`, // This path is relative to the root of the site.
+        name: config.title,
+        short_name: config.shortName,
+        description: config.description,
+        start_url: config.pathPrefix,
+        background_color: config.backgroundColor,
+        theme_color: config.themeColor,
+        display: 'standalone',
+        icon: config.favicon,
       },
     },
   ],
