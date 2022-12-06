@@ -1,36 +1,34 @@
-import React from 'react';
-import Helmet from 'react-helmet';
-import PropTypes from 'prop-types';
-import { StaticQuery, graphql } from 'gatsby';
+import React from 'react'
+import Helmet from 'react-helmet'
+import { StaticQuery, graphql } from 'gatsby'
 
-const SEO = ({ title, desc, banner, pathname, article }) => (
+const SEO = ({ title }) => (
   <StaticQuery
     query={query}
-    render={({
-      site: {
-        buildTime,
-        siteMetadata: { siteUrl, pathPrefix },
-      },
-      prismicSiteConfig: {
-        data: {
-          defaultTitle,
-          author,
-          alt_title,
-          short_title,
-          logo,
-          defaultDescription,
-          defaultBanner,
-          twitter_username,
+    render={(data) => {
+      console.log(data)
+      const {
+        site: {
+          siteMetadata: { siteUrl },
         },
-        lang,
-      },
-    }) => {
+        prismicSiteConfig: {
+          data: {
+            defaultTitle,
+            alt_title,
+            short_title,
+            defaultDescription,
+            defaultBanner,
+            twitter_username,
+          },
+          lang,
+        },
+      } = data
       const seo = {
         title: title || defaultTitle,
         description: defaultDescription || desc,
-        image: `${defaultBanner.url}`,
-        url: `${siteUrl}${pathname || '/'}`,
-      };
+        image: defaultBanner.url,
+        url: siteUrl,
+      }
       let schemaOrgJSONLD = [
         {
           '@context': 'http://schema.org',
@@ -40,44 +38,7 @@ const SEO = ({ title, desc, banner, pathname, article }) => (
           name: defaultTitle,
           alternateName: alt_title || '',
         },
-      ];
-      if (article) {
-        schemaOrgJSONLD = [
-          {
-            '@context': 'http://schema.org',
-            '@type': 'BlogPosting',
-            '@id': seo.url,
-            url: seo.url,
-            name: title,
-            alternateName: alt_title || '',
-            headline: title,
-            image: {
-              '@type': 'ImageObject',
-              url: seo.image,
-            },
-            description: seo.description,
-            datePublished: buildTime,
-            dateModified: buildTime,
-            author: {
-              '@type': 'Person',
-              name: author,
-            },
-            publisher: {
-              '@type': 'Organization',
-              name: author,
-              logo: {
-                '@type': 'ImageObject',
-                url: logo.url,
-              },
-            },
-            isPartOf: siteUrl,
-            mainEntityOfPage: {
-              '@type': 'WebSite',
-              '@id': siteUrl,
-            },
-          },
-        ];
-      }
+      ]
       return (
         <Helmet title={defaultTitle + ' : ' + seo.title}>
           <html lang={lang} />
@@ -91,7 +52,7 @@ const SEO = ({ title, desc, banner, pathname, article }) => (
           </script>
           {/* OpenGraph  */}
           <meta property="og:url" content={seo.url} />
-          <meta property="og:type" content={article ? 'article' : null} />
+          <meta property="og:type" content={null} />
           <meta property="og:title" content={seo.title} />
           <meta property="og:description" content={seo.description} />
           <meta property="og:image" content={seo.image} />
@@ -108,50 +69,26 @@ const SEO = ({ title, desc, banner, pathname, article }) => (
           />
           <link rel="shortcut icon" href="/images/favicon.ico" />
         </Helmet>
-      );
+      )
     }}
   />
-);
+)
 
-export default SEO;
-
-SEO.propTypes = {
-  title: PropTypes.string,
-  desc: PropTypes.string,
-  banner: PropTypes.string,
-  pathname: PropTypes.string,
-  article: PropTypes.bool,
-  index_page: PropTypes.bool,
-};
-
-SEO.defaultProps = {
-  title: null,
-  desc: null,
-  banner: null,
-  pathname: null,
-  article: false,
-  index_page: false,
-};
+export default SEO
 
 const query = graphql`
   query SEO {
     site {
-      buildTime(formatString: "YYYY-MM-DD")
       siteMetadata {
         siteUrl: url
-        pathPrefix
       }
     }
     prismicSiteConfig {
       data {
         defaultTitle: title
         alt_title
-        author
         short_title
         defaultDescription: description
-        logo {
-          url
-        }
         defaultBanner: banner {
           url
         }
@@ -160,4 +97,4 @@ const query = graphql`
       lang
     }
   }
-`;
+`
