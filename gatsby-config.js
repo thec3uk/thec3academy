@@ -77,5 +77,15 @@ module.exports = {
         icon: config.favicon,
       },
     },
+    {
+      resolve: `gatsby-plugin-umami`,
+      options: {
+        websiteId: 'c9ca3f93-1107-49cc-b2e4-ddb0dbae79d1',
+        srcUrl: 'https://analytics.myc3.life/umami.js',
+        includeInDevelopment: false,
+        autoTrack: true,
+        respectDoNotTrack: true,
+      },
+    },
   ],
 }
