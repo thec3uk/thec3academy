@@ -1,19 +1,19 @@
-import React from 'react';
-import { graphql } from 'gatsby';
-import BackgroundImage from 'gatsby-background-image';
+import React from 'react'
+import { graphql } from 'gatsby'
+import BackgroundImage from 'gatsby-background-image'
 
-import '../components/academy/style.scoped.css';
-import '../components/academy/academy.css';
-import Quote from '../components/academy/quote';
-import TwoColumnText from '../components/academy/twoColumnText';
-import TextWithImage from '../components/academy/textWithImage';
-import Text from '../components/academy/text';
-import Testimonial from '../components/academy/testimonial';
-import TextWithHexImage from '../components/academy/textHexImage';
-import TextWithCTA from '../components/academy/textWithCtas';
+import '../components/academy/style.scoped.css'
+import '../components/academy/academy.css'
+import Quote from '../components/academy/quote'
+import TwoColumnText from '../components/academy/twoColumnText'
+import TextWithImage from '../components/academy/textWithImage'
+import Text from '../components/academy/text'
+import Testimonial from '../components/academy/testimonial'
+import TextWithHexImage from '../components/academy/textHexImage'
+import TextWithCTA from '../components/academy/textWithCtas'
 
-import HtmlHexagon from '../components/academy/HtmlHex';
-import SEO from '../components/SEO';
+import HtmlHexagon from '../components/academy/HtmlHex'
+import SEO from '../components/SEO'
 
 const Slices = ({ slices }) => {
   return (
@@ -27,24 +27,24 @@ const Slices = ({ slices }) => {
         team: Testimonial,
         hex_image_with_text: TextWithHexImage,
         text_with_ctas: TextWithCTA,
-      };
-      const Component = componentListObj[contentSlice.slice_type];
+      }
+      const Component = componentListObj[contentSlice.slice_type]
       if (Component === undefined) {
-        console.warn('Warning: default case, content is unhandled');
-        return <div key={idx}></div>;
+        console.warn('Warning: default case, content is unhandled')
+        return <div key={idx}></div>
       }
       return (
         <div key={idx} id={`${idx}`} className="py-12 md:py-32">
           <Component key={idx} data={contentSlice} />
         </div>
-      );
+      )
     })
-  );
-};
+  )
+}
 
 const AcademyPage = ({ data }) => {
-  const page = data.prismicAcademyPage.data;
-  const body = page.body;
+  const page = data.prismicAcademyPage.data
+  const body = page.body
 
   return (
     <div id="academy">
@@ -55,9 +55,9 @@ const AcademyPage = ({ data }) => {
         fluid={page.hero_image.fluid}
         backgroundColor={'#040e18'}
       >
-        <div className="grid grid-cols-8 grid-rows-4 lg:grid-rows-12 h-screen mx-16 md:mx-0">
+        <div className="grid h-screen grid-cols-8 grid-rows-4 mx-16 lg:grid-rows-12 md:mx-0">
           <HtmlHexagon
-            className="text-purple-trans stroke-purple fill-current col-start-1 col-end-9 row-start-2 row-end-5 lg:col-start-3 lg:col-end-7 lg:row-start-2 lg:row-end-5"
+            className="col-start-1 col-end-9 row-start-2 row-end-5 fill-current text-purple-trans lg:col-start-3 lg:col-end-7 lg:row-start-2 lg:row-end-5"
             containerClassName="text-center grid-rows-6 px-16 pt-16"
           >
             <img
@@ -65,18 +65,23 @@ const AcademyPage = ({ data }) => {
               alt="C3 Logo in White with text"
               className="w-12 mx-auto mt-8"
             />
-            <h1 className="text-5xl font-accent text-yellow subpixel-antialiased py-8 lg:py-12">
-              <span className="font-title lowercase text-white">The C3</span>{' '}
+            <h1 className="pt-8 pb-4 text-5xl subpixel-antialiased font-accent text-yellow lg:pt-12 lg:pb-4">
+              <span className="text-white lowercase font-title">The C3</span>{' '}
               Academy
             </h1>
-            <div className="flex flex-col lg:items-center px-20 lg:px-8">
+            {page.lead_paragraph && (
+              <p className="font-sans text-lg leading-5 text-white">
+                {page.lead_paragraph.text}
+              </p>
+            )}
+            <div className="flex flex-col px-20 lg:items-center lg:px-8">
               {page.ctas.map((cta, idx) => {
-                const textColor = idx % 2 === 0 ? 'text-black' : 'text-white';
-                const bgColor = idx % 2 === 0 ? 'bg-yellow' : 'bg-purple';
+                const textColor = idx % 2 === 0 ? 'text-black' : 'text-white'
+                const bgColor = idx % 2 === 0 ? 'bg-yellow' : 'bg-purple'
                 const hoverTextColor =
-                  idx % 2 === 0 ? 'text-white' : 'text-white';
+                  idx % 2 === 0 ? 'text-white' : 'text-white'
                 const hoverBgColor =
-                  idx % 2 === 0 ? 'bg-yellow-200' : 'bg-purple-200';
+                  idx % 2 === 0 ? 'bg-yellow-200' : 'bg-purple-200'
                 return (
                   <a
                     className={`cta ${textColor} ${bgColor} hover:${hoverTextColor} hover:${hoverBgColor} px-4 pt-1 pb-2 lg:pt-0 lg:pb-1 shadow font-title lowercase text-2xl lg:text-base my-2 lg:m-2`}
@@ -85,7 +90,7 @@ const AcademyPage = ({ data }) => {
                   >
                     {cta.text}
                   </a>
-                );
+                )
               })}
             </div>
           </HtmlHexagon>
@@ -95,10 +100,10 @@ const AcademyPage = ({ data }) => {
         <Slices slices={body} />
       </main>
     </div>
-  );
-};
+  )
+}
 
-export default AcademyPage;
+export default AcademyPage
 
 export const query = graphql`
   {
@@ -116,6 +121,9 @@ export const query = graphql`
             ...GatsbyPrismicImageFluid
           }
         }
+        lead_paragraph {
+          text
+        }
         body {
           ...quote
           ...twoColumnText
@@ -128,4 +136,4 @@ export const query = graphql`
       }
     }
   }
-`;
+`
