@@ -48,6 +48,9 @@ const AcademyPage = ({ data }) => {
 
   return (
     <div id="academy">
+      <div className='w-screen flex justify-center text-center px-4'>
+        <h2 className='text-lg py-4 text-purple font-sans'>Applications Are Now Open for Academic Year 2023-2024</h2>
+      </div>
       <SEO title={page.page_title} />
       <BackgroundImage
         Tag="header"
