@@ -32,7 +32,7 @@ module.exports = {
       options: {
         repositoryName: prismicRepositoryName,
         accessToken: process.env.PRISMIC_ACCESS_TOKEN,
-        linkResolver: ({ node, key, value }) => linkResolver,
+        linkResolver: ({}) => linkResolver,
         customTypesApiToken: process.env.PRISMIC_CUSTOM_TYPES_API_TOKEN,
         // schemas: {
         //   academy_page: require('./src/schemas/academy_page.json'),
@@ -63,7 +63,7 @@ module.exports = {
         // allExtensions: true, // defaults to false
       },
     },
-    'gatsby-plugin-tslint',
+
     {
       resolve: `gatsby-plugin-manifest`,
       options: {

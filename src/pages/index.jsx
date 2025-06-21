@@ -1,6 +1,9 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import BackgroundImage from 'gatsby-background-image'
+import { convertToBgImage } from 'gbimage-bridge'
+
+import { getImage } from 'gatsby-plugin-image'
 
 import '../components/academy/style.scoped.css'
 import '../components/academy/academy.css'
@@ -46,17 +49,19 @@ const AcademyPage = ({ data }) => {
   const page = data.prismicAcademyPage.data
   const body = page.body
 
+  const gImage = getImage(page.hero_image)
+  const bgImage = convertToBgImage(gImage)
   return (
     <div id="academy">
-{/*       <div className='w-screen flex justify-center text-center px-4'>
+      {/*       <div className='w-screen flex justify-center text-center px-4'>
         <h2 className='text-lg py-4 text-purple font-sans'>Applications Are Now Open for Academic Year 2023-2024</h2>
       </div> */}
       <SEO title={page.page_title} />
       <BackgroundImage
         Tag="header"
         className={'w-screen'}
-        fluid={page.hero_image.fluid}
         backgroundColor={'#040e18'}
+        {...bgImage}
       >
         <div className="grid h-screen grid-cols-8 grid-rows-4 mx-16 lg:grid-rows-12 md:mx-0">
           <HtmlHexagon
@@ -87,7 +92,7 @@ const AcademyPage = ({ data }) => {
                   idx % 2 === 0 ? 'bg-yellow-200' : 'bg-purple-200'
                 return (
                   <a
-                    className={`cta ${textColor} ${bgColor} hover:${hoverTextColor} hover:${hoverBgColor} px-4 pt-1 pb-2 lg:pt-0 lg:pb-1 shadow font-title lowercase text-2xl lg:text-base my-2 lg:m-2`}
+                    className={`cta ${textColor} ${bgColor} hover:${hoverTextColor} hover:${hoverBgColor} px-4 pt-1 pb-2 lg:pt-0 lg:pb-1 shadow font-title lowercase text-2xl lg:text-base my-2 lg:mt-0 lg:mb-2`}
                     href={cta.link.url}
                     key={idx}
                   >
@@ -120,9 +125,7 @@ export const query = graphql`
           }
         }
         hero_image {
-          fluid(maxWidth: 1920) {
-            ...GatsbyPrismicImageFluid
-          }
+          gatsbyImageData
         }
         lead_paragraph {
           text

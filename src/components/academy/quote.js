@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
-import { graphql } from 'gatsby'
-import Transition from '../Transition'
-import HtmlHexagon from './HtmlHex'
+import React, { useState } from "react"
+import { graphql } from "gatsby"
+import Transition from "../Transition"
+import HtmlHexagon from "./HtmlHex"
 
 const HexModal = ({ content, setModalOpen }) => (
   <div
     className={
-      'z-50 bg-purple text-white rounded px-4 pt-5 pb-4 mx-1 md:mx-8 max-h-full overflow-scroll shadow-xl transform transition-all sm:max-w-3xl sm:w-full sm:p-6 '
+      "z-50 bg-purple text-white rounded px-4 pt-5 pb-4 mx-1 md:mx-8 max-h-full overflow-scroll shadow-xl transform transition-all sm:max-w-3xl sm:w-full sm:p-6 "
     }
     onClick={() => setModalOpen(false)}
     role="dialog"
@@ -16,9 +16,7 @@ const HexModal = ({ content, setModalOpen }) => (
     <div>
       <div>
         <svg
-          className={
-            'fill-current bg-purple absolute right-0 mr-8 cursor-pointer'
-          }
+          className={"fill-current bg-purple absolute right-0 mr-8 cursor-pointer"}
           xmlns="http://www.w3.org/2000/svg"
           width="18"
           height="18"
@@ -36,7 +34,7 @@ const HexModal = ({ content, setModalOpen }) => (
 const Quote = ({ data }) => {
   const [modalOpen, setModalOpen] = useState(false)
   return (
-    <section className={'px-2 md:px-8 text-black mt-8 lg:mt-0 -mb-8 '}>
+    <section className={"px-2 md:px-8 text-black mt-8 lg:mt-0 -mb-8 "}>
       <div className="grid row-gap-4 md:row-gap-0 grid-cols-4 mx-16 md:mx-0 grid-rows-9 md:grid-cols-8 md:grid-rows-6 ">
         <HtmlHexagon
           className="col-start-1 col-end-5 md:col-start-5 md:col-end-8 row-start-1 row-end-4 md:row-end-4 stroke-yellow fill-current text-yellow"
@@ -66,10 +64,10 @@ const Quote = ({ data }) => {
             <button onClick={() => setModalOpen(true)}>
               <img
                 className="mx-auto"
-                style={{ filter: 'brightness(100%) invert(100%) opacity(0.6)' }}
+                style={{ filter: "brightness(100%) invert(100%) opacity(0.6)" }}
                 src="/images/IconPlay.png"
                 alt="play icon"
-              />{' '}
+              />{" "}
             </button>
           </div>
         </HtmlHexagon>
@@ -87,7 +85,7 @@ const Quote = ({ data }) => {
           >
             <div className="fixed inset-0 transition-opacity ">
               <div
-                className={'absolute inset-0 bg-purple opacity-75 z-20'}
+                className={"absolute inset-0 bg-purple opacity-75 z-20"}
                 role="presentation"
                 onClick={() => setModalOpen(false)}
               ></div>

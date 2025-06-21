@@ -1,6 +1,6 @@
-import React from 'react'
-import Helmet from 'react-helmet'
-import { StaticQuery, graphql } from 'gatsby'
+import React from "react"
+import Helmet from "react-helmet"
+import { StaticQuery, graphql } from "gatsby"
 
 const SEO = ({ title }) => (
   <StaticQuery
@@ -12,44 +12,35 @@ const SEO = ({ title }) => (
           siteMetadata: { siteUrl },
         },
         prismicSiteConfig: {
-          data: {
-            defaultTitle,
-            alt_title,
-            short_title,
-            defaultDescription,
-            defaultBanner,
-            twitter_username,
-          },
+          data: { defaultTitle, alt_title, short_title, defaultDescription, defaultBanner, twitter_username },
           lang,
         },
       } = data
       const seo = {
         title: title || defaultTitle,
-        description: defaultDescription || desc,
+        description: defaultDescription,
         image: defaultBanner.url,
         url: siteUrl,
       }
       let schemaOrgJSONLD = [
         {
-          '@context': 'http://schema.org',
-          '@type': 'WebSite',
-          '@id': siteUrl,
+          "@context": "http://schema.org",
+          "@type": "WebSite",
+          "@id": siteUrl,
           url: siteUrl,
           name: defaultTitle,
-          alternateName: alt_title || '',
+          alternateName: alt_title || "",
         },
       ]
       return (
-        <Helmet title={defaultTitle + ' : ' + seo.title}>
+        <Helmet title={defaultTitle + " : " + seo.title}>
           <html lang={lang} />
           <meta name="description" content={seo.description} />
           <meta name="image" content={seo.image} />
           <meta name="apple-mobile-web-app-title" content={short_title} />
           <meta name="application-name" content={short_title} />
           <link rel="canonical" href={seo.url} />
-          <script type="application/ld+json">
-            {JSON.stringify(schemaOrgJSONLD)}
-          </script>
+          <script type="application/ld+json">{JSON.stringify(schemaOrgJSONLD)}</script>
           {/* OpenGraph  */}
           <meta property="og:url" content={seo.url} />
           <meta property="og:type" content={null} />
@@ -63,10 +54,7 @@ const SEO = ({ title }) => (
           <meta name="twitter:description" content={seo.description} />
           <meta name="twitter:image" content={seo.image} />
           <meta charset="utf-8" />
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0, user-scalable=yes"
-          />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
           <link rel="shortcut icon" href="/images/favicon.ico" />
         </Helmet>
       )

@@ -1,14 +1,11 @@
-import React from 'react'
-import { graphql } from 'gatsby'
+import React from "react"
+import { graphql } from "gatsby"
 
 const Text = ({ data }) => {
   return (
-    <section className={'lg:px-8 text-black lg:mx-8'}>
+    <section className={"lg:px-8 text-black lg:mx-8"}>
       <div className="grid grid-cols-1">
-        <div
-          className="py-10 px-6 font-sans "
-          dangerouslySetInnerHTML={{ __html: data.primary.text.html }}
-        ></div>
+        <div className="py-10 px-6 font-sans " dangerouslySetInnerHTML={{ __html: data.primary.text.html }}></div>
       </div>
     </section>
   )

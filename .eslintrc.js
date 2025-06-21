@@ -1,24 +1,25 @@
 module.exports = {
-  parser: `@typescript-eslint/parser`,
+  parser: "@typescript-eslint/parser",
   extends: [
-    "plugin:@typescript-eslint/recommended",
+    "eslint:recommended",
+    "@typescript-eslint/recommended",
     "plugin:prettier/recommended",
-    "prettier/@typescript-eslint",
   ],
   plugins: ["@typescript-eslint", "prettier"],
   parserOptions: {
-    ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
-    sourceType: "module", // Allows for the use of imports
+    ecmaVersion: 2018,
+    sourceType: "module",
   },
   env: {
     browser: true,
     node: true,
+    es6: true,
   },
   rules: {
     quotes: "off",
     "@typescript-eslint/quotes": [
-      2,
-      "backtick",
+      "error",
+      "double",
       {
         avoidEscape: true,
       },
@@ -33,5 +34,19 @@ module.exports = {
         printWidth: 120,
       },
     ],
+    // Disable some rules that might conflict with Prettier
+    "@typescript-eslint/indent": "off",
+    // Allow require() in config files
+    "@typescript-eslint/no-var-requires": "off",
   },
+  ignorePatterns: [
+    "node_modules/",
+    "dist/",
+    "build/",
+    "public/",
+    ".cache/",
+    "coverage/",
+    "*.min.js",
+    ".gatsby/",
+  ],
 }

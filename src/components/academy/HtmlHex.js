@@ -1,10 +1,10 @@
-import React from 'react';
-import Hexagon from 'react-hexagon';
+import React from "react"
+import Hexagon from "react-hexagon"
 
 const HtmlHexagon = ({ children, containerClassName, onClick, ...props }) => {
   return (
     <Hexagon
-      style={{ stroke: 'inherit', fill: 'inherit' }}
+      style={{ stroke: "inherit", fill: "inherit" }}
       flatTop={true}
       onClick={onClick}
       hexProps={props}
@@ -22,7 +22,7 @@ const HtmlHexagon = ({ children, containerClassName, onClick, ...props }) => {
         {children}
       </foreignObject>
     </Hexagon>
-  );
-};
+  )
+}
 
-export default HtmlHexagon;
+export default HtmlHexagon

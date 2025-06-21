@@ -1,16 +1,21 @@
-import React from 'react'
-import { graphql } from 'gatsby'
-import BackgroundImage from 'gatsby-background-image'
-import HtmlHexagon from './HtmlHex'
+import React from "react"
+import { graphql } from "gatsby"
+import BackgroundImage from "gatsby-background-image"
+import HtmlHexagon from "./HtmlHex"
+import { convertToBgImage } from "gbimage-bridge"
+
+import { getImage } from "gatsby-plugin-image"
 
 const TextWithCTA = ({ data }) => {
+  const gImage = getImage(data.primary.background_image)
+  const bgImage = convertToBgImage(gImage)
   return (
     <BackgroundImage
       Tag="section"
-      className={'-my-32 py-24  bg-fixed'}
-      fluid={data.primary.background_image.fluid}
-      backgroundColor={'#040e18'}
-      background-position={'top'}
+      className={"-my-32 py-24  bg-fixed"}
+      backgroundColor={"#040e18"}
+      background-position={"top"}
+      {...bgImage}
     >
       <div className="grid grid-cols-1 mx-16 lg:grid-cols-3 md:mx-0">
         <HtmlHexagon
@@ -23,15 +28,12 @@ const TextWithCTA = ({ data }) => {
           ></div>
           <div className="flex flex-col mx-20">
             {data.items.map((cta, idx) => {
-              const textColor = idx % 2 === 0 ? 'text-black' : 'text-white'
-              const bgColor = idx % 2 === 0 ? 'bg-yellow' : 'bg-purple'
-              const borderColor =
-                idx % 2 === 0 ? 'border-black' : 'border-white'
-              const hoverTextColor = idx % 2 === 0 ? 'text-white' : 'text-white'
-              const hoverBgColor =
-                idx % 2 === 0 ? 'bg-yellow-200' : 'bg-purple-200'
-              const hoverBorderColor =
-                idx % 2 === 0 ? 'border-white' : 'border-black'
+              const textColor = idx % 2 === 0 ? "text-black" : "text-white"
+              const bgColor = idx % 2 === 0 ? "bg-yellow" : "bg-purple"
+              const borderColor = idx % 2 === 0 ? "border-black" : "border-white"
+              const hoverTextColor = idx % 2 === 0 ? "text-white" : "text-white"
+              const hoverBgColor = idx % 2 === 0 ? "bg-yellow-200" : "bg-purple-200"
+              const hoverBorderColor = idx % 2 === 0 ? "border-white" : "border-black"
               return (
                 <a
                   className={`cta ${textColor} ${bgColor} ${borderColor} hover:${hoverTextColor} hover:${hoverBgColor} hover:${hoverBorderColor} px-6 pb-3 pt-2 shadow-lg border font-title lowercase text-xl m-4`}
@@ -59,9 +61,7 @@ export const query = graphql`
       }
       background_image {
         alt
-        fluid(maxWidth: 1920) {
-          ...GatsbyPrismicImageFluid
-        }
+        gatsbyImageData
       }
     }
     items {
