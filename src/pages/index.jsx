@@ -71,9 +71,9 @@ const AcademyPage = ({ data }) => {
             <img
               src="/images/LogoWhite.png"
               alt="C3 Logo in White with text"
-              className="w-12 mx-auto mt-8"
+              className="w-14 mx-auto mt-1 lg:mt-8"
             />
-            <h1 className="pt-8 pb-4 text-5xl subpixel-antialiased font-accent text-yellow lg:pt-12 lg:pb-4">
+            <h1 className="pt-4 pb-4 text-5xl subpixel-antialiased font-accent text-yellow lg:pt-12 lg:pb-4">
               <span className="text-white lowercase font-title">The C3</span>{' '}
               Academy
             </h1>
@@ -82,7 +82,7 @@ const AcademyPage = ({ data }) => {
                 {page.lead_paragraph.text}
               </p>
             )}
-            <div className="flex flex-col px-20 lg:items-center lg:px-8">
+            <div className="flex flex-col px-20 lg:items-center lg:px-8 pt-2">
               {page.ctas.map((cta, idx) => {
                 const textColor = idx % 2 === 0 ? 'text-black' : 'text-white'
                 const bgColor = idx % 2 === 0 ? 'bg-yellow' : 'bg-purple'
@@ -92,7 +92,7 @@ const AcademyPage = ({ data }) => {
                   idx % 2 === 0 ? 'bg-yellow-200' : 'bg-purple-200'
                 return (
                   <a
-                    className={`cta ${textColor} ${bgColor} hover:${hoverTextColor} hover:${hoverBgColor} px-4 pt-1 pb-2 lg:pt-0 lg:pb-1 shadow font-title lowercase text-2xl lg:text-base my-2 lg:mt-0 lg:mb-2`}
+                    className={`cta ${textColor} ${bgColor} hover:${hoverTextColor} hover:${hoverBgColor} px-4 pt-1 pb-2 lg:pt-0 lg:pb-1 shadow font-title lowercase text-2xl lg:text-base mt-0 mb-2`}
                     href={cta.link.url}
                     key={idx}
                   >
